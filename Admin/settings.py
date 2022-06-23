@@ -1,4 +1,3 @@
-import imp
 import os
 from pathlib import Path
 import django_heroku
@@ -40,7 +39,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
    
-]
+] 
 
 ROOT_URLCONF = 'Admin.urls'
 
@@ -134,3 +133,36 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+
+
+django_heroku.settings(locals())
+WHITENOISE_MANIFEST_STRICT = False
+# if website is live
+if os.getcwd() == '/app':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    # AWS 
+    AWS_ACCESS_KEY_ID = 'AKIASQITCY4Y5YL736O2'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'agmir-media'
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEBUG = False
+
+    DEBUG_PROPAGATE_EXCEPTIONS = True
+    
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+ACCESS_CONTROL_ALLOW_ORIGIN = True
+
+
+
+
+# authenticated tols
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'
