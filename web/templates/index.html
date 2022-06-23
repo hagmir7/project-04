@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="card w-100 shadow-sm p-2">
+    <h2 class="h3">Tablue de bord</h2>
+    <div class="row w-100 mt-3">
+        <div class="col-md-4">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <img class="text-center" src="{% static 'icons/puzzle.png' %}" alt="" width="80px"><br>
+                    <span>33232$ Collectes</span>
+                </div>
+            </div>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-people"></i> MEMBERS</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-clipboard-heart"></i> DONS ET
+                DONATEURS</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-chat-left"></i> EMAILING</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-image"></i> GALORY PHOTOS</a>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <img class="text-center" src="{% static 'icons/people.png' %}" alt="" width="80px"><br>
+                    <span>33 Members</span>
+                </div>
+            </div>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-calendar-check"></i> EVENEMENTS</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-layout-text-sidebar"></i> BLOGS</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-calendar-event"></i> CALENDRIER</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-bag"></i> DEPENSES</a>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <img class="text-center" src="{% static 'icons/magnifier.png' %}" alt="" width="80px"><br>
+                    <span>332 Visites</span>
+                </div>
+            </div>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-globe"></i> SITE INTERNET</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-graph-up-arrow"></i> STATISTIQUES</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-mortarboard"></i> MADRASSA</a>
+            <a href="#!" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-gear"></i> PARAMETRAGE ET THEME</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

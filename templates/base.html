@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{% static 'style.css' %}"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <title>{% if title %}Website - {{title}} {% else %}Webiste{% endif %}</title>
+</head>
+
+<style>
+    .content {
+        width: 100%;
+    }
+    .card-img{
+        object-fit: cover;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    {% include "component/header.html" %}
+    <div class="d-flex">
+        {% include "component/side.html" %}
+        <div class="content p-2">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    {% if name %}
+    <script>
+        document.getElementById('{{name}}').classList.add('active')
+    </script>
+    {% endif %}
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" ></script>
+</body>
+
+</html>

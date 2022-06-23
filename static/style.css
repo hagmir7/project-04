@@ -1,0 +1,265 @@
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px;
+    background-color: rgb(32, 31, 31);
+    color: white;
+    position: sticky;
+    width: 100%;
+    top: 0;
+
+}
+.nav-tols{
+     display: flex;
+}
+
+.nav-tols div{
+    margin: 0 10px;
+    padding: 7px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: .5s;
+}
+
+.nav-tols div:hover{
+    background-color: ghostwhite;
+    color: black;
+
+}
+
+.side{
+    background: #000;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    left: 0;
+    color: white;
+    top: 65px;
+}
+
+.avatar{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+.login-user{
+
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid gray;
+}
+
+.login-user div{
+    padding: 0 10px;
+}
+
+li{
+    list-style: none;
+}
+.list-menu{
+    padding: 10px;
+}
+
+.list-menu ul li{
+    padding: 12px;
+    color: white!important;
+    transition: .5s;
+}
+
+.list-menu ul li:hover{
+    background-color: gray;
+    border-radius: 4px 20px 20px 4px;
+}
+
+a{
+    text-decoration: none!important;  
+}
+
+
+
+.content{
+    margin-left: 250px;
+    padding: 7px;
+}
+
+.card{
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    padding: 6px;
+    overflow: hidden;
+}
+
+.bord{
+    display: flex;
+
+}
+.bord div{
+    width: 33.33%;
+    padding: 4px;
+}
+
+.bord-btn{
+    color: black;
+    padding: 11px;
+    border: 2px solid gray;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+}
+
+.new-muber-btn{
+    color: black;
+    padding: 7px;
+    border: 2px solid gray;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    background: white;
+    height: 40px;
+}
+
+.input{
+    padding: 10px;
+    border: 1px solid #a5a0a0;
+    border-radius: 3px;
+    width: 100%;
+
+}
+select{
+    padding: 10px;
+    border: 1px solid #a5a0a0;
+    border-radius: 3px;
+    width: 100%;
+}
+.members .tools{
+    display:  flex;
+    
+}
+
+.members .tools div{
+    width: 33.33%;
+    padding: 5px;
+}
+
+
+.list-menu ul li a{
+    color: white;
+}
+
+table{
+    width: 100%;
+    margin-top: 7px;
+}
+
+
+.tbl-header{
+    font-weight: 500;
+}
+
+td{
+    padding: 4px;
+    border-bottom: 1px solid gainsboro;
+}
+.pagination-content{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-item {
+    padding: 5px 10px;
+    border: 1px solid gainsboro;
+    margin: 5px 9px;
+}
+
+.pagination-item:hover{
+    background-color: gainsboro;
+}
+
+.active {
+    background-color: black;
+    color: white;
+}
+
+.active:hover{
+    background-color: black;
+    color: white;
+}
+
+.cart-content{
+    display: flex;
+}
+.card-image{
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+.cart-content .blog{
+    width: 33.33%;
+    margin: 5px 10px;
+}
+.blog{
+    padding: 0!important;
+}
+.card-detail{
+    padding: 6px;
+}
+
+.card-description{
+    padding: 7px 0;
+    display: inline-block;
+
+}
+
+.card-btns{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 7px;
+    font-weight: 500;
+}
+
+.actions-icon a{
+    margin: 0 4px;
+}
+
+.dons{
+    background: #f1a71e;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 19px;
+    display: inline-block;
+    color: white;
+    font-weight: 500;
+}
+
+.form-depen{
+    display: flex;
+}
+.form-depen div{
+    width: 33.33%;
+    padding: 12px;
+}
+
+.filter-input{
+    padding: 8px 4px;
+    width: 100%;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    font-size: 18px;
+}
+.filter-input:focus-visible{
+    outline: 0;
+}
