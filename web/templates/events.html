@@ -6,8 +6,16 @@
         <div class="col-md-4">
             <h1 class="h3">Événements</h1>
         </div>
-        <div class="col-md-4"><input type="text" class="form-control" placeholder="Filter..."></div>
-        <div class="col-md-4 text-end"><a href="#" class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter un événement</a></div>
+        <div class="col-md-4">
+            <div class="input-group w-100">
+                <span class="input-group-text" id="basic-addon1">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control" placeholder="Filter..." aria-label="Input group example"
+                    aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-4 text-end"><a href="#" data-bs-toggle="modal" data-bs-target="#event-create" class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter un événement</a></div>
     </div>
 
     <div class="row">
@@ -46,4 +54,26 @@
 
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="event-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter un Événements</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/create-user" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Ajouter</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

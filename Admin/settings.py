@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web'
+    'web',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -165,5 +166,5 @@ ACCESS_CONTROL_ALLOW_ORIGIN = True
 
 
 # authenticated tols
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
