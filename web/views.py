@@ -298,8 +298,120 @@ def calendar(request):
 
 
 def blogs(request):
+
     context = {
         'name':'blogs',
         'title': "Blogs"
     }
     return render(request, 'blogs.html', context)
+
+
+
+
+
+# Cours
+
+def cours(request):
+    cours = Cours.objects.all().order_by('-id')
+    association = Association.objects.all().order_by('-id')
+    context = {
+        'name':'cours',
+        'cours': cours,
+        'title': "Courses",
+        'association': association
+    }
+    return render(request, 'cours.html', context)
+
+def cours_detail(request, id):
+    context = {}
+    return render(request, 'cours-detail.html', context)
+
+def create_cours(request):
+    form = CrateCoursForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cours créée avec succès...')
+            return redirect('cours')
+        else:
+            print('not valid')
+            return redirect('cours')
+    else:
+        return redirect('cours')
+
+def update_cours(request, id):
+    cours = Cours.objects.get(id=id)
+    form = CrateCoursForm(request.POST, instance=cours)
+    association = Association.objects.all().order_by('-id')
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cours créée avec succès...')
+            return redirect('cours')
+        else:
+            return redirect('home')
+    context = {'cours':cours, 'association':association}
+    return render(request, 'update-cours.html', context)
+
+
+def delete_cours(request, id):
+    cours = Cours.objects.get(id=id)
+    cours.delete()
+    messages.success(request, 'Cours supprimée avec succès...')
+    return redirect('cours')
+
+
+
+
+
+# Group
+def group(request):
+    group = Group.objects.all().order_by('-id')
+    cours = Cours.objects.all().order_by('-id')
+    context = {
+        'name':'group',
+        'group': group,
+        'title': "groupes",
+        'cours': cours
+    }
+    return render(request, 'group.html', context)
+
+def group_detail(request, id):
+    context = {}
+    return render(request, 'group-detail.html', context)
+
+def create_group(request):
+    form = CrateGroupForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'group créée avec succès...')
+            return redirect('group')
+        else:
+            print('not valid')
+            return redirect('group')
+    else:
+        return redirect('group')
+
+def update_group(request, id):
+    group = Group.objects.get(id=id)
+    form = CrateGroupForm(request.POST, instance=group)
+    cours = Cours.objects.all().order_by('-id')
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'group créée avec succès...')
+            return redirect('group')
+        else:
+            return redirect('home')
+    context = {'group':group, 'cours':cours}
+    return render(request, 'update-group.html', context)
+
+
+def delete_group(request, id):
+    group = Group.objects.get(id=id)
+    group.delete()
+    messages.success(request, 'group supprimée avec succès...')
+    return redirect('group')

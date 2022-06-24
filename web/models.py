@@ -57,8 +57,8 @@ class Cours(models.Model):
 class Group(models.Model):
     intitule = models.FloatField()
     nbr_etudient = models.IntegerField()
-    date_debut = models.DateTimeField()
-    date_fine = models.DateTimeField()
+    date_debut = models.DateField()
+    date_fine = models.DateField()
     cours = models.ForeignKey(Cours, on_delete=models.CASCADE)
 
 

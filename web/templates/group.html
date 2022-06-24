@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-shadow p-2 overflow-hidden">
+    <div class="row w-100 mb-3">
+        <div class="col-md-4">
+            <h1 class="h3">Groups</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group w-100">
+                <span class="input-group-text" id="basic-addon1">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control" placeholder="Filter..." aria-label="Input group example"
+                    aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-4 text-end"><a href="#" data-bs-toggle="modal" data-bs-target="#group-create"
+                class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter un group</a></div>
+    </div>
+<!-- fields = ('intitule', 'nbr_etudient', 'date_debut','date_fine','cours',) -->
+
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Intitule</th>
+                    <th scope="col">Nomber etudient</th>
+                    <th scope="col">Date debut</th>
+                    <th scope="col">Date fine</th>
+                    <th scope="col">Cours</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in group %}
+                <tr>
+                    <td>{{group.intitule}}</td>
+                    <td>{{group.nbr_etudient}}</td>
+                    <td>{{group.date_debut}}</td>
+                    <td>{{group.date_fine}}</td>
+                    <td>{{group.cours.intitule}}</td>
+                    <td>
+                        <a href="update/group/{{group.id}}" class="btn btn-info btn-sm text-white"><i class="bi bi-pencil"></i></a>
+                        <a href="delete/group/{{group.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le group')"  class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example" class="mt-3">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+</div>
+
+<!-- Modal -->
+
+
+<div class="modal fade" id="group-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un Événements</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/create/group" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="number" class="form-control mb-3" name="intitule" placeholder="Intitule.." required>
+                    <input type="number" class="form-control mb-3" name="nbr_etudient" placeholder="Nomber etudient..." required>
+                    <input type="date" class="form-control mb-3" name="date_debut" placeholder="Date debut..." required>
+                    <input type="date" class="form-control mb-3" name="date_fine" placeholder="Date fine..." required>
+                    <select name="cours" id="" class="mt-3 form-select">
+                        {% for item in cours %}
+                        <option value="{{item.id}}">{{item.intitule}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Ajouter</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

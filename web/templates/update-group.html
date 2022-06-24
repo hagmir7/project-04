@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div class="row d-flex justify-content-center">
+    <div class="card shadow-sm p-2 col-md-6">
+        <h4 class="mb-3">Modification de Événement</h4>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="number" value="{{group.intitule}}" class="form-control mb-3" name="intitule" placeholder="Intitule.." required>
+            <input type="number" value="{{group.nbr_etudient}}"  class="form-control mb-3" name="nbr_etudient" placeholder="Nomber etudient..." required>
+            <input type="date" value="{{group.date_debut|date:'o-m-d'}}"  class="form-control mb-3" name="date_debut" placeholder="Date debut..." required>
+            <input type="date" class="form-control mb-3" value="{{group.date_fine|date:'o-m-d'}}"  name="date_fine" placeholder="Date fine..." required>
+            <select name="cours" id="" class="mt-3 form-select">
+                <option value="" selected>Selectioner cours</option>
+                {% for item in cours %}
+                {% if item.intitule == group.cours.intitule %}
+                <option value="{{item.id}}" selected>{{item.intitule}}</option>
+                {% else %}
+                <option value="{{item.id}}">{{item.intitule}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-info text-white mt-3 w-100">Modifir</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

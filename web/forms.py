@@ -42,3 +42,17 @@ class CrateDepenseForm(forms.ModelForm):
 
 
 
+
+class CrateCoursForm(forms.ModelForm):
+    class Meta:
+        model = Cours
+        fields = ('intitule', 'value_aoraire', 'description','cible','association',)
+
+
+class CrateGroupForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ('intitule', 'nbr_etudient', 'date_debut','date_fine','cours',)
+
+
+

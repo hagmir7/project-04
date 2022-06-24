@@ -32,6 +32,20 @@ urlpatterns = [
 
 	path('create/expenses', create_expenses, name='create_expenses'),
 	path('update/expenses/<int:id>', update_expenses, name='update_expenses'),
-	path('delete/expenses/<int:id>', delete_expenses, name='delete_expenses')
+	path('delete/expenses/<int:id>', delete_expenses, name='delete_expenses'),
+
+	path('cours', cours, name='cours'),
+	path('cours/<int:id>', cours_detail, name='cours_detail'),
+	path('create/cours', create_cours, name='create_cours'),
+	path('update/cours/<int:id>', update_cours, name='update_cours'),
+	path('delete/cours/<int:id>', delete_cours, name='delete_cours'),
+
+
+	# Group
+	path('group', group, name='group'),
+	path('group/<int:id>', group_detail, name='group_detail'),
+	path('create/group', create_group, name='create_group'),
+	path('update/group/<int:id>', update_group, name='update_group'),
+	path('delete/group/<int:id>', delete_group, name='delete_group')
 
 ]   
