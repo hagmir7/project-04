@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row d-flex justify-content-center">
+    <div class="card shadow-sm p-2 col-md-6">
+        <h4 class="mb-3">Modification de l'association</h4>
+        <form action="/update/association/{{association.id}}" method="POST">
+            {% csrf_token %}
+            <input type="text" value="{{form.nom.value}}" class="form-control mb-3" name="nom" placeholder="Nom.." required>
+            <input type="text" value="{{form.type.value}}" class="form-control mb-3" name="type" placeholder="Type.." required>
+            <input type="text" value="{{form.adresse.value}}" class="form-control mb-3" name="adresse" placeholder="Adresse.." required>
+            <input type="tel" value="{{form.tel.value}}" class="form-control mb-3" name="tel" placeholder="Tel.." required>
+            <input type="tel" value="{{form.fixe.value}}" class="form-control mb-3" name="fixe" placeholder="fixe.." required>
+            <input type="text" value="{{form.facebook.value}}" class="form-control mb-3" name="facebook" placeholder="Facebook..">
+            <input type="text" value="{{form.twitter.value}}" class="form-control mb-3" name="twitter" placeholder="Twitter..">
+            <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Modifier</button>
+          </form>
+    </div>
+</div>
+
+{% endblock %}

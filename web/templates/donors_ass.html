@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card shadow-shadow p-2">
     <div class="row w-100 mb-3">
-        <div class="col-md-4"><h1 class="h3">Donateurs</h1></div>
+        <div class="col-md-4"><h1 class="h5">Association et Donateurs</h1></div>
         <div class="col-md-4">
             <div class="input-group w-100">
                 <span class="input-group-text" id="basic-addon1">
@@ -17,29 +17,28 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Prenom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Portable</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Somme des dons</th>
+                <th scope="col">Association</th>
+                <th scope="col">Duateur</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Date</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-          {% for donor in donors %}
+          {% for item in donors_ass %}
             <tr>
-                <td>{{donor.nom}}</td>
-                <td>{{donor.prenom}}</td>
-                <td>{{donor.tel}}</td>
-                <td>{{donor.email}}</td>
+                <td>{{item.association.nom}}</td>
+                <td>{{item.douateur.nom}}</td>
                 <td>
-                    <span class="badge bg-warning text-dark rounded-pill text-white p-2">100$</span>
+                    <span class="badge bg-warning text-dark rounded-pill text-white p-2">{{item.montant}} DHS</span>
                 </td>
+                <td>{{item.date|date:'d, D, M, o'}}</td>
+
                 <td>
-                    <a href="/update/donor/{{donor.id}}" class="btn btn-info btn-sm text-white"><i class="bi bi-pencil"></i></a>
+                    <a href="/update/donors_ass/{{item.id}}" class="btn btn-info btn-sm text-white"><i class="bi bi-pencil"></i></a>
                     <!-- <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-list"></i></a>
                     <a href="#" class="btn btn-success btn-sm"><i class="bi bi-calendar-heart"></i></a> -->
-                    <a href="/delete/donor/{{donor.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le Donateur')"  class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                    <a href="/delete/donors_ass/{{item.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le Donateur')"  class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
                 </td>
             </tr>
             {% endfor %}
@@ -74,12 +73,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/create/donor" method="POST">
+        <form action="/create/donors_ass" method="POST">
           {% csrf_token %}
-          <input type="text" class="form-control mb-3" name="nom" placeholder="Nom.." required>
-          <input type="text" class="form-control mb-3" name="prenom" placeholder="Prenom..." required>
-          <input type="tel" class="form-control mb-3" name="tel" placeholder="Tel.." required>
-          <input type="email" class="form-control mb-3" name="email" placeholder="E-amil..." required>
+            <select name="association" class="form-select mb-3" id="">
+                <option value="" selected>Selectione Association</option>
+                {% for item in association %}
+                <option value="{{item.id}}">{{item.nom}}</option>
+                {% endfor %}
+            </select>
+            <select name="douateur" class="form-select mb-3" id="">
+                <option value="" selected>Selectione Donateur </option>
+                {% for item in douateur %}
+                <option value="{{item.id}}">{{item.nom}}</option>
+                {% endfor %}
+            </select>
+          <input type="number" class="form-control mb-3" name="montant" placeholder="Montan..." required>
+          <input type="date" class="form-control mb-3" name="date" placeholder="Date..." required>
           <button type="submit" class="btn btn-info text-white w-100">Ajouter</button>
       </form>
       </div>

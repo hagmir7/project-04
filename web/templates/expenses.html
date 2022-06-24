@@ -1,21 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form class="row my-3 p-2">
-  <div class="col-md-4">
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Category</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form class="row my-3 p-2" action="/create/expenses" method="POST">
+  {% csrf_token %}
+  <div class="col-md-3">
+    <input type="text" class="form-control" placeholder="Category" name="category">
   </div>
-
-  <div class="col-md-4">
-    <input type="text" class="form-control" placeholder="Montan">
+  <div class="col-md-3">
+    <input type="text" name="montant" class="form-control" placeholder="Montan">
   </div>
-  <div class="col-md-4 text-center">
-    <button class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter</button>
+  <div class="col-md-3">
+    <input type="date" name="date" class="form-control" placeholder="Date">
+  </div>
+  <div class="col-md-3 text-center">
+    <button class="btn btn-outline-primary"><i class="bi bi-plus"></i>Ajouter</button>
   </div>
 
 </form>
@@ -44,20 +42,22 @@
       </tr>
     </thead>
     <tbody>
+      {% for item in expenses %}
       <tr>
-        <td>Agmir test</td>
+        <td>{{item.category}}</td>
         <td>
-          <span class="badge bg-warning text-dark rounded-pill text-white p-2">100$</span>
+          <span class="badge bg-warning text-dark rounded-pill text-white p-2">{{item.montant}}</span>
         </td>
-        <td>Vendredi, 12 juillet 2022</td>
+        <td>{{item.date|date:'D, d, M, o'}}</td>
         <td>
-          <a href="update/expense/{{expense.id}}" class="btn btn-info btn-sm text-white"><i class="bi bi-pencil"></i></a>
-          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-list"></i></a>
-          <a href="#" class="btn btn-success btn-sm"><i class="bi bi-calendar-heart"></i></a>
-          <a href="delete/expense/{{expense.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le Dépense')"  class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
+          <a href="/update/expenses/{{item.id}}" class="btn btn-info btn-sm text-white"><i class="bi bi-pencil"></i></a>
+          <!-- <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-list"></i></a>
+          <a href="#" class="btn btn-success btn-sm"><i class="bi bi-calendar-heart"></i></a> -->
+          <a href="/delete/expenses/{{item.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le Dépense')"  class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
 
         </td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 
@@ -81,7 +81,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="expense-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modelEx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

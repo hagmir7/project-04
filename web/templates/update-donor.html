@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div class="row d-flex justify-content-center">
+    <div class="card shadow-sm p-2 col-md-6">
+        <h4 class="mb-3">Modification de Événement</h4>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" class="form-control mb-3" name="nom" value="{{donor.nom}}" placeholder="Nom.." required>
+            <input type="text" class="form-control mb-3" name="prenom" value="{{donor.prenom}}" placeholder="Prenom..." required>
+            <input type="tel" class="form-control mb-3" name="tel" value="{{donor.tel}}" placeholder="Tel.." required>
+            <input type="email" class="form-control mb-3" name="email" value="{{donor.email}}" placeholder="E-amil..." required>
+            <button type="submit" class="btn btn-info text-white w-100">Ajouter</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

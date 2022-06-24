@@ -15,24 +15,33 @@
                     aria-describedby="basic-addon1">
             </div>
         </div>
-        <div class="col-md-4 text-end"><a href="#" data-bs-toggle="modal" data-bs-target="#event-create" class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter un événement</a></div>
+        <div class="col-md-4 text-end"><a href="#" data-bs-toggle="modal" data-bs-target="#event-create"
+                class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter un événement</a></div>
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        {% for event in events %}
+        <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;">
-                <img src="https://github.com/mdo.png" height="200px" class="card-img-top card-img" alt="...">
+                <a href="/event/{{event.id}}" class="text-dark">
+                    <img src="https://github.com/mdo.png" height="200px" class="card-img-top card-img" alt="{{event.titre}}">
+                </a>
                 <div class="card-body p-1">
-                    <h5 class="card-title">Card title</h5>
-                    <small class="card-text p-0 m-0">Lundi, 1 juin - landi, 1juin</small>
-                    <p class="card-text p-0 m-0">Lorem ipsum dolor sit amet consectetur.</p>
+                    <a href="/event/{{event.id}}" class="text-dark">
+                    <h5 class="card-title">{{event.titre}}</h5>
+                </a>
+                    <small class="card-text p-0 m-0">{{event.date_debut|date:'D, d, M, o'}} -
+                        {{event.date_fine|date:'D, d, M, o'}}</small>
+                    <p class="card-text p-0 m-0">{{event.description}}</p>
                     <div class="d-flex justify-content-between">
-                        <a href="#">MODIFIR</a>
+                        <a href="/update/event/{{event.id}}">MODIFIR</a>
                         <a href="#">EXPORTER</a>
                     </div>
                 </div>
             </div>
+
         </div>
+        {% endfor %}
     </div>
     <nav aria-label="Page navigation example" class="mt-3">
         <ul class="pagination">
@@ -58,22 +67,31 @@
 <!-- Modal -->
 <div class="modal fade" id="event-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ajouter un Événements</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un Événements</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/create/event" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" class="form-control mb-3" name="titre" placeholder="Titre.." required>
+                    <textarea name="description" class="form-control mb-3" id="" cols="30" rows="5"
+                        placeholder="Description..." required></textarea>
+                    <input type="date" class="form-control mb-3" name="date_debut" placeholder="Date debut..." required>
+                    <input type="date" class="form-control mb-3" name="date_fine" placeholder="Date Fine.." required>
+                    <input type="text" class="form-control mb-3" name="liue" placeholder="Liue..." required>
+                    <input type="number" class="form-control mb-3" name="nbr_particip" placeholder="Nomber particip.."
+                        required>
+                    <input type="number" class="form-control mb-3" name="tarif" placeholder="Tarif..." required>
+                    <input type="file" class="form-control mb-3" accept="image/*" name="image" required>
+                    <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Ajouter</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <form action="/create-user" method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Ajouter</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock %}

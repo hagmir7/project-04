@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row d-flex justify-content-center">
+    <div class="card shadow-sm p-2 col-md-6">
+        <h4 class="mb-3">Modification </h4>
+        <form method="POST">
+            {% csrf_token %}
+            <select name="association" class="form-select mb-3" id="">
+                <option value="" selected>Selectione Association</option>
+                {% for item in association %}
+                {% if item.nom == donor_ass.association.nom %}
+                <option value="{{item.id}}" selected>{{item.nom}}</option>
+                {% else %}
+                <option value="{{item.id}}">{{item.nom}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <select name="douateur" class="form-select mb-3" id="">
+                <option value="" selected>Selectione Donateur </option>
+                {% for item in douateur %}
+                {% if item.nom == donor_ass.douateur.nom %}
+                <option value="{{item.id}}" selected>{{item.nom}}</option>
+                {% else %}
+                <option value="{{item.id}}" >{{item.nom}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+          <input type="number" value="{{donor_ass.montant}}" class="form-control mb-3" name="montant" placeholder="Montan..." required>
+          <input type="date" value="{{donor_ass.date|date:'o-m-d'}}" class="form-control mb-3" name="date" placeholder="Date..." required>            <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Modifier</button>
+          </form>
+    </div>
+</div>
+
+{% endblock %}
