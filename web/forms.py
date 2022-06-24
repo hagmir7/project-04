@@ -54,5 +54,7 @@ class CrateGroupForm(forms.ModelForm):
         model = Group
         fields = ('intitule', 'nbr_etudient', 'date_debut','date_fine','cours',)
 
-
-
+class CrateTacheForm(forms.ModelForm):
+    class Meta:
+        model = Tache
+        fields = ('association', 'mumbre',)

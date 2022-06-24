@@ -47,6 +47,11 @@ urlpatterns = [
 	path('group/<int:id>', group_detail, name='group_detail'),
 	path('create/group', create_group, name='create_group'),
 	path('update/group/<int:id>', update_group, name='update_group'),
-	path('delete/group/<int:id>', delete_group, name='delete_group')
-
+	path('delete/group/<int:id>', delete_group, name='delete_group'),
+	# Tache
+	path('tache', tache, name='tache'),
+	path('tache/<int:id>', tache_detail, name='tache_detail'),
+	path('create/tache', create_tache, name='create_tache'),
+	path('update/tache/<int:id>', update_tache, name='update_tache'),
+	path('delete/tache/<int:id>', delete_tache, name='delete_tache')
 ]   

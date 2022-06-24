@@ -6,23 +6,23 @@ from .models import *
 from django.contrib import messages
 
 
-
-
 def home(request):
     context = {
-        'name':'dashboard',
+        'name': 'dashboard',
         'title': "Dashboard"
     }
     return render(request, 'index.html', context)
 
+
 def association(request):
     association = Association.objects.all()
     context = {
-        'name':'association',
+        'name': 'association',
         'title': "Association",
-        'associations' : association
+        'associations': association
     }
     return render(request, 'association.html', context)
+
 
 def create_association(request):
     form = CrateAssociationForm()
@@ -35,15 +35,17 @@ def create_association(request):
     else:
         return redirect('home')
 
+
 def update_association(request, id):
     association = Association.objects.get(id=id)
-    form = CrateAssociationForm(request.POST or None, instance = association)
+    form = CrateAssociationForm(request.POST or None, instance=association)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
             messages.success(request, 'Association modifiée avec succès...')
             return redirect('association')
-    return render(request, 'update-association.html', {'form':form,'association':association})       
+    return render(request, 'update-association.html', {'form': form, 'association': association})
+
 
 def delete_association(request, id):
     association = Association.objects.get(id=id)
@@ -51,18 +53,18 @@ def delete_association(request, id):
     messages.success(request, 'Association supprimée avec succès...')
     return redirect('association')
 
-    
 
 def users(request):
     association = Association.objects.all()
     member = Membre.objects.all().order_by('-id')
     context = {
         'association': association,
-        'members':member,
-        'name':'users',
+        'members': member,
+        'name': 'users',
         'title': "Members"
     }
     return render(request, 'users.html', context)
+
 
 def create_member(request):
     if request.method == 'POST':
@@ -82,13 +84,13 @@ def delete_member(request, id):
     return redirect('users')
 
 
-
 def update_member(request, id):
     association = Association.objects.all()
     member = Membre.objects.get(id=id)
     form = CrateMemberForm(instance=member)
     if request.method == 'POST':
-        form = CrateMemberForm(request.POST, files=request.FILES, instance=member)
+        form = CrateMemberForm(
+            request.POST, files=request.FILES, instance=member)
         if form.is_valid():
             form.save()
             messages.success(request, 'Member modifiée avec succès...')
@@ -96,9 +98,8 @@ def update_member(request, id):
         else:
             print('not valide')
             return redirect('users')
-    context = {'form':form, 'member':member, 'association':association}
+    context = {'form': form, 'member': member, 'association': association}
     return render(request, 'update-member.html', context)
-    
 
 
 def events(request):
@@ -106,11 +107,10 @@ def events(request):
 
     context = {
         'events': events,
-        'name':'events',
+        'name': 'events',
         'title': "Événements"
     }
     return render(request, 'events.html', context)
-
 
 
 def events_detail(request, id):
@@ -120,6 +120,7 @@ def events_detail(request, id):
         'title': event.titre
     }
     return render(request, 'events-detail.html', context)
+
 
 def create_event(request):
     if request.method == 'POST':
@@ -140,8 +141,9 @@ def update_event(request, id):
             form.save()
             messages.success(request, 'Événement modifiée avec succès...')
             return redirect('events')
-    context = {'event':event}
+    context = {'event': event}
     return render(request, 'update-event.html', context)
+
 
 def delete_event(request, id):
     event = Evenement.objects.get(id=id)
@@ -150,12 +152,11 @@ def delete_event(request, id):
     return redirect('events')
 
 
-
 def donors(request):
     donors = Douateur.objects.all().order_by('-id')
     context = {
-        'donors':donors,
-        'name':'donors',
+        'donors': donors,
+        'name': 'donors',
         'title': "Dons et donateur"
     }
     return render(request, 'donors.html', context)
@@ -180,7 +181,7 @@ def update_donor(request, id):
             form.save()
             messages.success(request, 'Donateur modifiée avec succès...')
             return redirect('donors')
-    context = {'donor':donor}
+    context = {'donor': donor}
     return render(request, 'update-donor.html', context)
 
 
@@ -191,22 +192,18 @@ def delete_donor(request, id):
     return redirect('donors')
 
 
-
-
 def donors_ass(request):
     donors_ass = DouateurAss.objects.all().order_by('-id')
     association = Association.objects.all().order_by('-id')
     douateur = Douateur.objects.all().order_by('-id')
     context = {
-        'donors_ass':donors_ass,
-        'douateur':douateur,
-        'association':association,
-        'name':'donors-ass',
+        'donors_ass': donors_ass,
+        'douateur': douateur,
+        'association': association,
+        'name': 'donors-ass',
         'title': "Association et Donateur"
     }
     return render(request, 'donors_ass.html', context)
-
-
 
 
 def create_donor_ass(request):
@@ -222,7 +219,6 @@ def create_donor_ass(request):
         return redirect('donors_ass')
 
 
-
 def update_donor_ass(request, id):
     donor_ass = DouateurAss.objects.get(id=id)
     form = CrateDouateurAssForm(request.POST, instance=donor_ass)
@@ -235,7 +231,8 @@ def update_donor_ass(request, id):
             return redirect('create_donor_ass')
         else:
             return redirect('home')
-    context = {'association':association, 'douateur':douateur,'donor_ass':donor_ass}
+    context = {'association': association,
+               'douateur': douateur, 'donor_ass': donor_ass}
     return render(request, 'update-donor-ass.html', context)
 
 
@@ -246,7 +243,7 @@ def delete_donor_ass(request, id):
     return redirect('create_donor_ass')
 
 
-# 
+#
 
 def create_expenses(request):
     form = CrateDepenseForm(request.POST)
@@ -260,6 +257,7 @@ def create_expenses(request):
     else:
         return redirect('expenses')
 
+
 def update_expenses(request, id):
     expenses = Depense.objects.get(id=id)
     form = CrateDepenseForm(request.POST, instance=expenses)
@@ -270,7 +268,7 @@ def update_expenses(request, id):
             return redirect('expenses')
         else:
             return redirect('home')
-    context = {'expenses':expenses}
+    context = {'expenses': expenses}
     return render(request, 'update-expenses.html', context)
 
 
@@ -281,26 +279,27 @@ def delete_expenses(request, id):
     return redirect('expenses')
 
 
-
 def expenses(request):
     expenses = Depense.objects.all().order_by('-id')
     context = {
-        'expenses':expenses,
-        'name':'expenses',
+        'expenses': expenses,
+        'name': 'expenses',
         'title': "Dépenses"
     }
     return render(request, 'expenses.html', context)
 
+
 def emailing(request):
     context = {
-        'name':'emailing',
+        'name': 'emailing',
         'title': "Emailing"
     }
     return render(request, 'emailing.html', context)
 
+
 def calendar(request):
     context = {
-        'name':'calendar',
+        'name': 'calendar',
         'title': "Calendrier"
     }
     return render(request, 'calendar.html', context)
@@ -309,13 +308,10 @@ def calendar(request):
 def blogs(request):
 
     context = {
-        'name':'blogs',
+        'name': 'blogs',
         'title': "Blogs"
     }
     return render(request, 'blogs.html', context)
-
-
-
 
 
 # Cours
@@ -324,16 +320,18 @@ def cours(request):
     cours = Cours.objects.all().order_by('-id')
     association = Association.objects.all().order_by('-id')
     context = {
-        'name':'cours',
+        'name': 'cours',
         'cours': cours,
         'title': "Courses",
         'association': association
     }
     return render(request, 'cours.html', context)
 
+
 def cours_detail(request, id):
     context = {}
     return render(request, 'cours-detail.html', context)
+
 
 def create_cours(request):
     form = CrateCoursForm(request.POST)
@@ -348,6 +346,7 @@ def create_cours(request):
     else:
         return redirect('cours')
 
+
 def update_cours(request, id):
     cours = Cours.objects.get(id=id)
     form = CrateCoursForm(request.POST, instance=cours)
@@ -360,7 +359,7 @@ def update_cours(request, id):
             return redirect('cours')
         else:
             return redirect('home')
-    context = {'cours':cours, 'association':association}
+    context = {'cours': cours, 'association': association}
     return render(request, 'update-cours.html', context)
 
 
@@ -371,24 +370,23 @@ def delete_cours(request, id):
     return redirect('cours')
 
 
-
-
-
 # Group
 def group(request):
     group = Group.objects.all().order_by('-id')
     cours = Cours.objects.all().order_by('-id')
     context = {
-        'name':'group',
+        'name': 'group',
         'group': group,
         'title': "groupes",
         'cours': cours
     }
     return render(request, 'group.html', context)
 
+
 def group_detail(request, id):
     context = {}
     return render(request, 'group-detail.html', context)
+
 
 def create_group(request):
     form = CrateGroupForm(request.POST)
@@ -403,6 +401,7 @@ def create_group(request):
     else:
         return redirect('group')
 
+
 def update_group(request, id):
     group = Group.objects.get(id=id)
     form = CrateGroupForm(request.POST, instance=group)
@@ -415,7 +414,7 @@ def update_group(request, id):
             return redirect('group')
         else:
             return redirect('home')
-    context = {'group':group, 'cours':cours}
+    context = {'group': group, 'cours': cours}
     return render(request, 'update-group.html', context)
 
 
@@ -424,3 +423,65 @@ def delete_group(request, id):
     group.delete()
     messages.success(request, 'group supprimée avec succès...')
     return redirect('group')
+
+
+# Tache
+def tache(request):
+    tache = Tache.objects.all().order_by('-id')
+    association = Association.objects.all().order_by('-id')
+    member = Membre.objects.all().order_by('-id')
+    context = {
+        'name': 'tache',
+        'tache': tache,
+        'title': "Tache",
+        'associations': association,
+        'members': member
+    }
+    return render(request, 'tache.html', context)
+
+
+def tache_detail(request, id):
+    context = {}
+    return render(request, 'tache-detail.html', context)
+
+
+def create_tache(request):
+    form = CrateTacheForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'tache créée avec succès...')
+            return redirect('tache')
+        else:
+            print('not valid')
+            return redirect('tache')
+    else:
+        return redirect('tache')
+
+
+def update_tache(request, id):
+    tache = Tache.objects.get(id=id)
+    form = CrateTacheForm(request.POST, instance=tache)
+    association = Association.objects.all().order_by('-id')
+    member = Membre.objects.all().order_by('-id')
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'tache créée avec succès...')
+            return redirect('tache')
+        else:
+            return redirect('home')
+    context = {
+        'tache': tache,
+        'associations': association,
+        'members': member
+    }
+    return render(request, 'update-tache.html', context)
+
+
+def delete_tache(request, id):
+    tache = Tache.objects.get(id=id)
+    tache.delete()
+    messages.success(request, 'tache supprimée avec succès...')
+    return redirect('tache')
