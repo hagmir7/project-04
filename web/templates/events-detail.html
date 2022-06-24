@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-shadow p-2">
+    <h1 class="h3">Événement : {{event.titre}}</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{event.image.url}}" class="img-fluid img-thumbnail" alt="...">
+            <!-- <img src="{{event.image.url}}" alt="{{evetn.titre}}" class="w-100"> -->
+        </div>
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Date debut</th>
+                    <th scope="col">Date fine</th>
+                    <th scope="col">Liue</th>
+                    <th scope="col">Nomber particip</th>
+                    <th scope="col">Tarif</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{event.titre}}</th>
+                    <td>{{event.date_debut}}</td>
+                    <td>{{event.date_fine}}</td>
+                    <td>{{event.liue}}</td>
+                    <td>{{event.nbr_particip}}</td>
+                    <td>{{event.tarif}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+    <div class="row">
+        {% for event in events %}
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;">
+                <a href="/event/{{event.id}}" class="text-dark">
+                    <img src="https://github.com/mdo.png" height="200px" class="card-img-top card-img" alt="{{event.titre}}">
+                </a>
+                <div class="card-body p-1">
+                    <a href="/event/{{event.id}}" class="text-dark">
+                    <h5 class="card-title">{{event.titre}}</h5>
+                </a>
+                    <small class="card-text p-0 m-0">{{event.date_debut|date:'D, d, M, o'}} -
+                        {{event.date_fine|date:'D, d, M, o'}}</small>
+                    <!-- <p class="card-text p-0 m-0">{{event.description}}</p> -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/update/event/{{event.id}}">MODIFIR</a>
+                        <!-- <a href="#">EXPORTER</a> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+{% endblock %}

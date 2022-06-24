@@ -112,6 +112,15 @@ def events(request):
     return render(request, 'events.html', context)
 
 
+
+def events_detail(request, id):
+    event = Evenement.objects.get(id=id)
+    context = {
+        'event': event,
+        'title': event.titre
+    }
+    return render(request, 'events-detail.html', context)
+
 def create_event(request):
     if request.method == 'POST':
         form = CrateEventrForm(request.POST, files=request.FILES)
