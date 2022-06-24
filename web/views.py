@@ -192,7 +192,7 @@ def donors_ass(request):
         'donors_ass':donors_ass,
         'douateur':douateur,
         'association':association,
-        'name':'donors_ass',
+        'name':'donors-ass',
         'title': "Association et Donateur"
     }
     return render(request, 'donors_ass.html', context)
