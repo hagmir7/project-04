@@ -13,7 +13,7 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
-
+@login_required
 def association(request):
     association = Association.objects.all()
     context = {
@@ -23,7 +23,7 @@ def association(request):
     }
     return render(request, 'association.html', context)
 
-
+@login_required
 def create_association(request):
     form = CrateAssociationForm()
     if request.method == 'POST':
@@ -35,7 +35,7 @@ def create_association(request):
     else:
         return redirect('home')
 
-
+@login_required
 def update_association(request, id):
     association = Association.objects.get(id=id)
     form = CrateAssociationForm(request.POST or None, instance=association)
@@ -46,14 +46,14 @@ def update_association(request, id):
             return redirect('association')
     return render(request, 'update-association.html', {'form': form, 'association': association})
 
-
+@login_required
 def delete_association(request, id):
     association = Association.objects.get(id=id)
     association.delete()
     messages.success(request, 'Association supprimée avec succès...')
     return redirect('association')
 
-
+@login_required
 def users(request):
     association = Association.objects.all()
     member = Membre.objects.all().order_by('-id')
@@ -65,7 +65,7 @@ def users(request):
     }
     return render(request, 'users.html', context)
 
-
+@login_required
 def create_member(request):
     if request.method == 'POST':
         form = CrateMemberForm(request.POST, files=request.FILES)
@@ -76,14 +76,14 @@ def create_member(request):
     else:
         return redirect('users')
 
-
+@login_required
 def delete_member(request, id):
     member = Membre.objects.get(id=id)
     member.delete()
     messages.success(request, 'Member supprimée avec succès...')
     return redirect('users')
 
-
+@login_required
 def update_member(request, id):
     association = Association.objects.all()
     member = Membre.objects.get(id=id)
@@ -101,7 +101,7 @@ def update_member(request, id):
     context = {'form': form, 'member': member, 'association': association}
     return render(request, 'update-member.html', context)
 
-
+@login_required
 def events(request):
     events = Evenement.objects.all().order_by('-id')
 
@@ -112,7 +112,7 @@ def events(request):
     }
     return render(request, 'events.html', context)
 
-
+@login_required
 def events_detail(request, id):
     event = Evenement.objects.get(id=id)
     context = {
@@ -121,7 +121,7 @@ def events_detail(request, id):
     }
     return render(request, 'events-detail.html', context)
 
-
+@login_required
 def create_event(request):
     if request.method == 'POST':
         form = CrateEventrForm(request.POST, files=request.FILES)
@@ -132,7 +132,7 @@ def create_event(request):
     else:
         return redirect('events')
 
-
+@login_required
 def update_event(request, id):
     event = Evenement.objects.get(id=id)
     form = CrateEventrForm(request.POST, files=request.FILES, instance=event)
@@ -144,14 +144,14 @@ def update_event(request, id):
     context = {'event': event}
     return render(request, 'update-event.html', context)
 
-
+@login_required
 def delete_event(request, id):
     event = Evenement.objects.get(id=id)
     event.delete()
     messages.success(request, 'Événement supprimée avec succès...')
     return redirect('events')
 
-
+@login_required
 def donors(request):
     donors = Douateur.objects.all().order_by('-id')
     context = {
@@ -161,7 +161,7 @@ def donors(request):
     }
     return render(request, 'donors.html', context)
 
-
+@login_required
 def create_donor(request):
     if request.method == 'POST':
         form = CrateDonorsForm(request.POST)
@@ -172,7 +172,7 @@ def create_donor(request):
     else:
         return redirect('donors')
 
-
+@login_required
 def update_donor(request, id):
     donor = Douateur.objects.get(id=id)
     form = CrateDonorsForm(request.POST, instance=donor)
@@ -184,14 +184,14 @@ def update_donor(request, id):
     context = {'donor': donor}
     return render(request, 'update-donor.html', context)
 
-
+@login_required
 def delete_donor(request, id):
     donor = Douateur.objects.get(id=id)
     donor.delete()
     messages.success(request, 'Donateur supprimée avec succès...')
     return redirect('donors')
 
-
+@login_required
 def donors_ass(request):
     donors_ass = DouateurAss.objects.all().order_by('-id')
     association = Association.objects.all().order_by('-id')
@@ -205,7 +205,7 @@ def donors_ass(request):
     }
     return render(request, 'donors_ass.html', context)
 
-
+@login_required
 def create_donor_ass(request):
     form = CrateDouateurAssForm(request.POST)
     if request.method == 'POST':
@@ -218,7 +218,7 @@ def create_donor_ass(request):
     else:
         return redirect('donors_ass')
 
-
+@login_required
 def update_donor_ass(request, id):
     donor_ass = DouateurAss.objects.get(id=id)
     form = CrateDouateurAssForm(request.POST, instance=donor_ass)
@@ -235,7 +235,7 @@ def update_donor_ass(request, id):
                'douateur': douateur, 'donor_ass': donor_ass}
     return render(request, 'update-donor-ass.html', context)
 
-
+@login_required
 def delete_donor_ass(request, id):
     donor = DouateurAss.objects.get(id=id)
     donor.delete()
@@ -244,7 +244,7 @@ def delete_donor_ass(request, id):
 
 
 #
-
+# @login_required
 def create_expenses(request):
     form = CrateDepenseForm(request.POST)
     if request.method == 'POST':
@@ -257,7 +257,7 @@ def create_expenses(request):
     else:
         return redirect('expenses')
 
-
+@login_required
 def update_expenses(request, id):
     expenses = Depense.objects.get(id=id)
     form = CrateDepenseForm(request.POST, instance=expenses)
@@ -271,14 +271,14 @@ def update_expenses(request, id):
     context = {'expenses': expenses}
     return render(request, 'update-expenses.html', context)
 
-
+@login_required
 def delete_expenses(request, id):
     expenses = Depense.objects.get(id=id)
     expenses.delete()
     messages.success(request, 'Depense supprimée avec succès...')
     return redirect('expenses')
 
-
+@login_required
 def expenses(request):
     expenses = Depense.objects.all().order_by('-id')
     context = {
@@ -288,7 +288,7 @@ def expenses(request):
     }
     return render(request, 'expenses.html', context)
 
-
+@login_required
 def emailing(request):
     context = {
         'name': 'emailing',
@@ -296,7 +296,7 @@ def emailing(request):
     }
     return render(request, 'emailing.html', context)
 
-
+@login_required
 def calendar(request):
     context = {
         'name': 'calendar',
@@ -304,7 +304,7 @@ def calendar(request):
     }
     return render(request, 'calendar.html', context)
 
-
+@login_required
 def blogs(request):
 
     context = {
@@ -315,7 +315,7 @@ def blogs(request):
 
 
 # Cours
-
+# @login_required
 def cours(request):
     cours = Cours.objects.all().order_by('-id')
     association = Association.objects.all().order_by('-id')
@@ -327,12 +327,12 @@ def cours(request):
     }
     return render(request, 'cours.html', context)
 
-
+@login_required
 def cours_detail(request, id):
     context = {}
     return render(request, 'cours-detail.html', context)
 
-
+@login_required
 def create_cours(request):
     form = CrateCoursForm(request.POST)
     if request.method == 'POST':
@@ -346,7 +346,7 @@ def create_cours(request):
     else:
         return redirect('cours')
 
-
+@login_required
 def update_cours(request, id):
     cours = Cours.objects.get(id=id)
     form = CrateCoursForm(request.POST, instance=cours)
@@ -362,7 +362,7 @@ def update_cours(request, id):
     context = {'cours': cours, 'association': association}
     return render(request, 'update-cours.html', context)
 
-
+@login_required
 def delete_cours(request, id):
     cours = Cours.objects.get(id=id)
     cours.delete()
@@ -370,7 +370,7 @@ def delete_cours(request, id):
     return redirect('cours')
 
 
-# Group
+@login_required# Group
 def group(request):
     group = Group.objects.all().order_by('-id')
     cours = Cours.objects.all().order_by('-id')
@@ -382,12 +382,12 @@ def group(request):
     }
     return render(request, 'group.html', context)
 
-
+@login_required
 def group_detail(request, id):
     context = {}
     return render(request, 'group-detail.html', context)
 
-
+@login_required
 def create_group(request):
     form = CrateGroupForm(request.POST)
     if request.method == 'POST':
@@ -401,7 +401,7 @@ def create_group(request):
     else:
         return redirect('group')
 
-
+@login_required
 def update_group(request, id):
     group = Group.objects.get(id=id)
     form = CrateGroupForm(request.POST, instance=group)
@@ -417,7 +417,7 @@ def update_group(request, id):
     context = {'group': group, 'cours': cours}
     return render(request, 'update-group.html', context)
 
-
+@login_required
 def delete_group(request, id):
     group = Group.objects.get(id=id)
     group.delete()
@@ -425,7 +425,7 @@ def delete_group(request, id):
     return redirect('group')
 
 
-# Tache
+@login_required# Tache
 def tache(request):
     tache = Tache.objects.all().order_by('-id')
     association = Association.objects.all().order_by('-id')
@@ -439,12 +439,12 @@ def tache(request):
     }
     return render(request, 'tache.html', context)
 
-
+@login_required
 def tache_detail(request, id):
     context = {}
     return render(request, 'tache-detail.html', context)
 
-
+@login_required
 def create_tache(request):
     form = CrateTacheForm(request.POST)
     if request.method == 'POST':
@@ -458,7 +458,7 @@ def create_tache(request):
     else:
         return redirect('tache')
 
-
+@login_required
 def update_tache(request, id):
     tache = Tache.objects.get(id=id)
     form = CrateTacheForm(request.POST, instance=tache)
@@ -479,9 +479,193 @@ def update_tache(request, id):
     }
     return render(request, 'update-tache.html', context)
 
-
+@login_required
 def delete_tache(request, id):
     tache = Tache.objects.get(id=id)
     tache.delete()
     messages.success(request, 'tache supprimée avec succès...')
     return redirect('tache')
+
+
+
+@login_required# session
+def session(request):
+    session = Session.objects.all().order_by('-id')
+    events = Evenement.objects.all().order_by('-id')
+    context = {
+        'name': 'session',
+        'session': session,
+        'title': "session",
+        'associations': association,
+        'events': events
+    }
+    return render(request, 'session.html', context)
+
+@login_required
+def session_detail(request, id):
+    context = {}
+    return render(request, 'session-detail.html', context)
+
+@login_required
+def create_session(request):
+    form = CrateSessionForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'session créée avec succès...')
+            return redirect('session')
+        else:
+            print('not valid')
+            return redirect('session')
+    else:
+        return redirect('session')
+
+@login_required
+def update_session(request, id):
+    session = Session.objects.get(id=id)
+    form = CrateSessionForm(request.POST, instance=session)
+    events = Evenement.objects.all().order_by('-id')
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'session créée avec succès...')
+            return redirect('session')
+        else:
+            return redirect('home')
+    context = {
+        'session': session,
+        'associations': association,
+        'events': events
+    }
+    return render(request, 'update-session.html', context)
+
+@login_required
+def delete_session(request, id):
+    session = Session.objects.get(id=id)
+    session.delete()
+    messages.success(request, 'session supprimée avec succès...')
+    return redirect('session')
+
+
+
+
+
+@login_required# evpa
+def evpa(request):
+    evpa = EvenementParticipant.objects.all().order_by('-id')
+    events = Evenement.objects.all().order_by('-id')
+    participant = Participant.objects.all().order_by('-id')
+    context = {
+        'name': 'evpa',
+        'evpa': evpa,
+        'title': "evpa",
+        'participant': participant,
+        'events': events
+    }
+    return render(request, 'evpa.html', context)
+
+@login_required
+def evpa_detail(request, id):
+    context = {}
+    return render(request, 'evpa-detail.html', context)
+
+@login_required
+def create_evpa(request):
+    form = CrateEvPaForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'evpa créée avec succès...')
+            return redirect('evpa')
+        else:
+            print('not valid')
+            return redirect('evpa')
+    else:
+        return redirect('evpa')
+
+@login_required
+def update_evpa(request, id):
+    evpa = EvenementParticipant.objects.get(id=id)
+    form = CrateEvPaForm(request.POST, instance=evpa)
+    events = Evenement.objects.all().order_by('-id')
+    participant = Participant.objects.all().order_by('-id')
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'evpa créée avec succès...')
+            return redirect('evpa')
+        else:
+            return redirect('home')
+    context = {
+        'evpa': evpa,
+        'participant': participant,
+        'events': events
+    }
+    return render(request, 'update-evpa.html', context)
+
+@login_required
+def delete_evpa(request, id):
+    evpa = EvenementParticipant.objects.get(id=id)
+    evpa.delete()
+    messages.success(request, 'evpa supprimée avec succès...')
+    return redirect('evpa')
+
+
+
+
+    
+@login_required# participant
+def participant(request):
+    participant = Participant.objects.all().order_by('-id')
+    context = {
+        'name': 'participant',
+        'participant': participant,
+        'title': "participant",
+        'participant': participant,
+        'events': events
+    }
+    return render(request, 'participant.html', context)
+
+@login_required
+def participant_detail(request, id):
+    context = {}
+    return render(request, 'participant-detail.html', context)
+
+@login_required
+def create_participant(request):
+    form = CrateParticipantForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'participant créée avec succès...')
+            return redirect('participant')
+        else:
+            print('not valid')
+            return redirect('participant')
+    else:
+        return redirect('participant')
+
+@login_required
+def update_participant(request, id):
+    participant = Participant.objects.get(id=id)
+    form = CrateParticipantForm(request.POST or None, instance=participant )
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'participant créée avec succès...')
+            return redirect('participant')
+        else:
+            return redirect('home')
+    context = {
+        'participant': participant,
+        'participant': participant,
+        'events': events
+    }
+    return render(request, 'update-participant.html', context)
+
+@login_required
+def delete_participant(request, id):
+    participant = Participant.objects.get(id=id)
+    participant.delete()
+    messages.success(request, 'participant supprimée avec succès...')
+    return redirect('participant')

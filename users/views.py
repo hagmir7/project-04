@@ -18,27 +18,21 @@ from django.utils.translation import gettext_lazy as _
 
 # LOGIN
 def login_view(request):
-    next = request.GET.get('next')
     form = UserLoginForm(request.POST or None)
-    alert = False
-    if request.user.is_authenticated:
-        return redirect('/')
-    else:
+    if request.method == 'POST':
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             if authenticate(username=username, password=password):
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return redirect('/')
+                return redirect('/dashboard')
             else:
                 messages.add_message(request, messages.ERROR, _('Password is incorrect!'))
                 return redirect('login')
-        if next:
-            return redirect(next)
 
     
-    context = {'form': form,'alert':alert, 'title': _("Log in")}
+    context = {'form': form, 'title': _("Log in")}
     return render(request, "registrations/login.html", context)
 
 # Welcom Message   

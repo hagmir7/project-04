@@ -91,7 +91,7 @@ class Evenement(models.Model):
     image = models.ImageField(upload_to='EvenementEmage', default='event.png', blank=True, null=True)
 
 class Participant(models.Model):
-    email = models.ImageField()
+    email = models.EmailField()
 
 
 class EvenementParticipant(models.Model):

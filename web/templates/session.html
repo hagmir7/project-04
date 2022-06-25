@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-shadow p-2 overflow-hidden">
+    <div class="row w-100 mb-3">
+        <div class="col-md-4">
+            <h1 class="h3">Sessions</h1>
+        </div>
+        <div class="col-md-4 text-end"><a href="#" data-bs-toggle="modal" data-bs-target="#session-create"
+                class="btn btn-outline-primary"><i class="bi bi-plus"></i> Ajouter un session</a></div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Houre debut</th>
+                    <th scope="col">Houre fine</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in session %}
+                <tr>
+                    <td>{{session.titre}}</td>
+                    <td>{{session.description}}</td>
+                    <td>{{session.heure_debut}}</td>
+                    <td>{{session.heure_fine}}</td>
+                    <td>
+                        <a href="update/session/{{session.id}}" class="btn btn-info btn-sm text-white"><i class="bi bi-pencil"></i></a>
+                        <a href="delete/session/{{session.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le session')"  class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example" class="mt-3">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+</div>
+
+<!-- Modal -->
+
+
+<div class="modal fade" id="session-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un Session</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- fields = ('titre', 'description', 'heure_debut','heure_fine','evenement',) -->
+
+            <div class="modal-body">
+                <form action="/create/session" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" class="form-control mb-3" name="titre" placeholder="Titre.." required>
+                    <textarea name="description" id="" cols="30" rows="5" class="mb-3 form-control" placeholder="Description..."></textarea>
+                    <input type="time" class="form-control mb-3" name="heure_debut" placeholder="Houre debut..." required>
+                    <input type="time" class="form-control mb-3" name="heure_fine" placeholder="Houre fine..." required>
+                    <select name="evenement" id="" class="mb-3 form-select">
+                        {% for item in events %}
+                        <option value="" selected>Selectioner evenement</option>
+                        <option value="{{item.id}}">{{item.titre}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Ajouter</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

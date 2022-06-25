@@ -8,13 +8,13 @@
             <select name="evenement" class="form-select mb-3" required>
                 {% for item in events %}
                 {% if item.id == evpa.evenement.id %}
-                <option value="{{item.id}}" selected>{{item.titre}}</option>
+                <option value="{{item.id}}">{{item.titre}}</option>
                 {% else %}
                 <option value="{{item.id}}">{{item.titre}}</option>
                 {% endif %}
                 {% endfor %}
-            </select>
-            <select name="participant" class="form-select mb-3" required>
+              </select>
+              <select name="participant" class="form-select mb-3" required>
                 {% for item in participant %}
                 {% if item.id == evpa.participant.id %}
                 <option value="{{item.id}}" selected>{{item.email}}</option>
@@ -22,7 +22,8 @@
                 <option value="{{item.id}}">{{item.email}}</option>
                 {% endif %}
                 {% endfor %}
-            </select>
+              </select>
+            <button type="submit" class="btn btn-info text-white w-100" data-bs-dismiss="modal">Modifier</button>
         </form>
     </div>
 </div>

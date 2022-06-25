@@ -58,3 +58,26 @@ class CrateTacheForm(forms.ModelForm):
     class Meta:
         model = Tache
         fields = ('association', 'mumbre',)
+
+
+class CrateSessionForm(forms.ModelForm):
+    class Meta:
+        model = Session
+        fields = ('titre', 'description', 'heure_debut','heure_fine','evenement',)
+
+
+class CrateEvPaForm(forms.ModelForm):
+    class Meta:
+        model = EvenementParticipant
+        fields = ('participant', 'evenement', )
+
+
+class CrateParticipantForm(forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields = ('email', )
+
+
+
+
+

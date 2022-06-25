@@ -174,5 +174,9 @@ ACCESS_CONTROL_ALLOW_ORIGIN = True
 
 
 # authenticated tols
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/dashboard'
+LOGOUT_REDIRECT_URL = '/'
+
+
+LOGIN_URL = '/'
+# LOGOUT_URL = '/dashboard'
