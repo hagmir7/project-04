@@ -25,10 +25,9 @@ class UserLoginForm(forms.Form):
     #     return super(UserLoginForm, self).clean(*args, **kwargs)
     
     def clean_username(self):
-        cd = self.cleaned_data
-        if not User.objects.filter(username=cd['username']).exists():
+        if not User.objects.filter(username=self.cleaned_data['username']).exists():
             raise ValidationError(_('There is no registered user with this name!'))
-        return cd['username']
+        return self.cleaned_data['username']
 
  
 

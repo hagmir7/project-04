@@ -29,27 +29,13 @@ def login_view(request):
                 return redirect('/dashboard')
             else:
                 messages.add_message(request, messages.ERROR, _('Password is incorrect!'))
-                return redirect('login')
+                return redirect('/')
 
     
     context = {'form': form, 'title': _("Log in")}
     return render(request, "registrations/login.html", context)
 
-# Welcom Message   
-def email_message(obj, body, to):
-    msg = EmailMessage()
-    msg.set_content(body)
-    msg['subject'] = obj
-    msg['to'] = to
-    username = 'hagmir7@gmail.com'
-    msg['from'] = username
-    password = 'jfpgqzkxetgyjbvo'
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(username, password)
-    server.send_message(msg)
-    server.quit()
 
 
 
