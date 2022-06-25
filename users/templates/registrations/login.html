@@ -1,7 +1,7 @@
 {% extends 'auth.html'%}{% load static %}{% load i18n %}{% block content %}
 <div class="row p-0 m-0 justify-content-center">
     <div class="card p-3 col-sm-12 col-md-8 col-lg-6 col-xl-4 border shadow-sm">
-        <h4 class="mb-2" >{% trans 'Log in' %}</h4>
+        <h4 class="mb-2" >{% trans 'Connexion' %}</h4>
         <div class="well">
             {% if messages %}
                 {% for message in messages %}
@@ -13,35 +13,34 @@
                 <div class="form-group mb-0">
                     {% if form.username.errors %}
                     <div class="alert alert-danger text-white p-2 mt-3" role="alert">{{ form.username.errors }}</div>{% endif %}
-                    <label for="id_username" class="h6">{% trans 'Username' %}</label>
+                    <label for="id_username" class="h6">{% trans "Le nom d'utilisateur" %}</label>
                     <div class="input-group mr-0 rounded-pill">
                         <input 
                             type="text" 
                             name="username" required
                             id="id_username"
                             class="form-control border-darck sans rounded-pill"
-                            placeholder="{% trans 'Enter your username' %}">
+                            placeholder='{% trans "Enter le nom d'utilisateur" %}'>
                     </div>
                 </div>
                 <div class="form-group ">
                     <p class="text-red">{{ form.password.errors }}</p>
-                    <label for="id_password" class="h6">{% trans 'Password' %}</label>
+                    <label for="id_password" class="h6">{% trans 'Mot de passe' %}</label>
                     <div class="input-group mr-0 rounded-pill">
                         <input type="password"
                             name="password" required 
                             id="id_password"
                             class="form-control border-darck rounded-pill"
-                            placeholder="{% trans 'Enter your Passwrd' %}">
+                            placeholder="{% trans 'Enter Mot de passe' %}">
                     </div>
                 </div>
                 <button type="submit" id="submit-button" class="btn mt-3  btn-success w-100 btn-block text-center">
-                    {% trans 'Log in' %}
+                    {% trans 'Connexion' %}
                 </button>
                 <p><a href="{% url 'register' %}" class="btn-primary btn w-100 btn-block text-center mt-3 bold">
-                    {% trans 'Register' %}
+                    {% trans "S'inscrire" %}
                 </a></p>
-                <a href="{% url 'reset_password' %}" class="mb-3 btn-block">{% trans 'Forgot Password' %}</a>
-            </form>
+                <a href="{% url 'reset_password' %}" class="mb-3 btn-block">Mot de passe oublié </a>
         </div>
     </div>
 </div>

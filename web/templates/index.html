@@ -6,9 +6,9 @@
     <div class="row w-100 mt-3">
         <div class="col-md-4">
             <div class="d-flex justify-content-center">
-                <div>
+                <div class="text-center">
                     <img class="text-center" src="{% static 'icons/puzzle.png' %}" alt="" width="80px"><br>
-                    <span>33232$ Collectes</span>
+                    <span>{{collectes}} DHS Collectes</span>
                 </div>
             </div>
             <a href="/users" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-people"></i> MEMBERS</a>
@@ -19,9 +19,9 @@
         </div>
         <div class="col-md-4">
             <div class="d-flex justify-content-center">
-                <div>
+                <div  class="text-center">
                     <img class="text-center" src="{% static 'icons/people.png' %}" alt="" width="80px"><br>
-                    <span>33 Members</span>
+                    <span>{{members}} Members</span>
                 </div>
             </div>
             <a href="/events" class="btn btn-outline-primary w-100 m-3"><i class="bi bi-calendar-check"></i> EVENEMENTS</a>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-md-4">
             <div class="d-flex justify-content-center">
-                <div>
+                <div class="text-center">
                     <img class="text-center" src="{% static 'icons/magnifier.png' %}" alt="" width="80px"><br>
                     <span>332 Visites</span>
                 </div>

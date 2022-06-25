@@ -13,6 +13,7 @@ urlpatterns = [
 	path('emailing', emailing, name='emailing'),
 	path('calendar', calendar, name='calendar'),
 	path('blogs', blogs, name="blogs"),
+	path('settings', settings, name="settings"),
 	
 	path('association', association, name='association'),
 	path('create/association', create_association, name='create_association'),

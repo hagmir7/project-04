@@ -7,11 +7,26 @@ from django.contrib import messages
 
 
 def home(request):
+    donors = Douateur.objects.all().count()
+    members = Membre.objects.all().count()
+    collectes = DouateurAss.collectes(self=DouateurAss)
     context = {
         'name': 'dashboard',
-        'title': "Dashboard"
+        'title': "Dashboard",
+        'donors': donors,
+        'collectes':collectes,
+        'members': members
     }
     return render(request, 'index.html', context)
+
+
+@login_required
+def settings(request):
+    context = {
+        'name': 'settings',
+        'title': "Paramètre"
+    }
+    return render(request, 'settings.html', context)
 
 @login_required
 def association(request):
@@ -154,6 +169,7 @@ def delete_event(request, id):
 @login_required
 def donors(request):
     donors = Douateur.objects.all().order_by('-id')
+    
     context = {
         'donors': donors,
         'name': 'donors',
@@ -669,3 +685,7 @@ def delete_participant(request, id):
     participant.delete()
     messages.success(request, 'participant supprimée avec succès...')
     return redirect('participant')
+
+
+
+    

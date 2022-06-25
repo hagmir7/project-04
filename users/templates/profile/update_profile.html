@@ -8,10 +8,10 @@
         <div class="row">
           <div class="col-xl-4 order-xl-2">
 
-              <div class="card p-2 alert update-profile-alert">
-                <h4 class="text-white"><i class="fa fa-exclamation-circle"></i>&#xa0; {% trans "Note" %}</h4>
+              <div class="card p-2 alert alert-danger ">
+                <h4><i class="fa fa-exclamation-circle"></i>&#xa0; {% trans "Noter" %}</h4>
                 <p class="w-100">
-                  {% trans 'Make sure that your contact information is correct and real, so that we can recover your account if you encounter a problem logging in.' %}
+                  {% trans "Assurez-vous que vos informations de contact sont correctes et réelles, afin que nous puissions récupérer votre compte si vous rencontrez un problème de connexion." %}
                 </p>
               </div>
 
@@ -21,7 +21,7 @@
             <div class="border p-2 bg-white">
                 <div class="tab-content">
                     <!-- ABOUT -->
-                    <h3 class="p-1 text-center">{% trans 'Update Profile' %}</h3>
+                    <h3 class="p-1 text-center">{% trans 'Modifier Profile' %}</h3>
                     <div class="d-flex justify-content-center w-100">
                  <form  method="POST" enctype="multipart/form-data" class="col-md-10 col-ms-12 col-lg-10 col-xl-10">
                         {% csrf_token %}

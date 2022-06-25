@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-shadow p-2">
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active h3 mb-0" aria-current="true">
+            <i class="bi bi-gear"></i> Paramètre
+        </a>
+        <a href="/profile_update/{{user.id}}/" class="list-group-item list-group-item-action"><i class="bi bi-person"></i> Editer le profil</a>
+        <a href="/accounts/change_password/" class="list-group-item list-group-item-action"><i class="bi bi-lock"></i> Modifier le mot de passe</a>
+        <a href="/user_update_info/" class="list-group-item list-group-item-action"><i class="bi bi-person-rolodex"></i> Modifier les coordonnées</a>
+      </div>
+</div>
+{% endblock %}
+
+

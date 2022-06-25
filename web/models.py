@@ -26,6 +26,13 @@ class Douateur(models.Model):
     email = models.EmailField()
 
 
+    def montant(self):
+        total = 0
+        for item in self.douass.all():
+            total += item.montant
+        return total
+
+
     def __str__(self):
         return self.nom + " " + self.prenom
 
@@ -33,9 +40,15 @@ class Douateur(models.Model):
 
 class DouateurAss(models.Model):
     association = models.ForeignKey(Association, on_delete=models.CASCADE)
-    douateur = models.ForeignKey(Douateur, on_delete=models.CASCADE)
+    douateur = models.ForeignKey(Douateur, on_delete=models.CASCADE, related_name='douass')
     montant = models.FloatField()
     date = models.DateField()
+
+    def collectes(self):
+        total = 0
+        for item in self.objects.all():
+            total += item.montant
+        return total
 
 
 class Depense(models.Model):
